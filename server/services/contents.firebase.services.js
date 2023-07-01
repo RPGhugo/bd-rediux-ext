@@ -38,7 +38,6 @@ class ContentServices {
             .then(  
                 (content) => {
                     const res = {
-                        _id: content.id,
                         titulo: content.data().titulo,
                         tags: content.data().tags,
                         midia: content.data().midia,
