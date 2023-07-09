@@ -25,6 +25,12 @@ router.put("/update/:id", function (req, res, next) {
 router["delete"]("/delete/:id", function (req, res, next) {
   _contentsFirebase["default"]["delete"](req, res);
 });
+router.get('/search', function (req, res, next) {
+  _contentsFirebase["default"].search(req, res);
+});
+router.get('/search/media', function (req, res, next) {
+  _contentsFirebase["default"].searchByMediaType(req, res);
+});
 
 //module.exports = router;
 var _default = router;

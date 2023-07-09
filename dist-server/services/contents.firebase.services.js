@@ -65,6 +65,39 @@ var ContentServices = /*#__PURE__*/function () {
         return console.log(error);
       });
     }
+  }, {
+    key: "search",
+    value: function search(request, response) {
+      var searchTerm = request.query.term;
+      var contentCollectionRef = (0, _firestore.collection)(_firebase["default"], "content");
+      (0, _firestore.getDocs)(contentCollectionRef).then(function (contentSnapshot) {
+        var contents = [];
+        contentSnapshot.forEach(function (content) {
+          var _id = content.id;
+          var _content$data2 = content.data(),
+            titulo = _content$data2.titulo,
+            tags = _content$data2.tags,
+            midia = _content$data2.midia,
+            descricao = _content$data2.descricao,
+            link = _content$data2.link,
+            autor = _content$data2.autor;
+          if (titulo.includes(searchTerm)) {
+            contents.push({
+              _id: _id,
+              tags: tags,
+              titulo: titulo,
+              midia: midia,
+              descricao: descricao,
+              link: link,
+              autor: autor
+            });
+          }
+        });
+        response.json(contents);
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    }
   }]);
   return ContentServices;
 }(); // module.exports = ContentServices 

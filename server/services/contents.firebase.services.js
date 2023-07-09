@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, doc, getDoc, updateDoc, deleteDoc, query, onSnapshot } from "firebase/firestore"
+import { collection, getDocs, addDoc, doc, getDoc, updateDoc, deleteDoc, query, onSnapshot, where } from "firebase/firestore"
 import db from "../db/firebase.connection"
 
 class ContentServices {
@@ -68,6 +68,25 @@ class ContentServices {
             .then(() => response.json({_id:request.params.id}))
             .catch(error => console.log(error))
     }
+
+    static search(request, response) {
+        const searchTerm = request.query.term;
+        const contentCollectionRef = collection(db, "content");
+      
+        getDocs(contentCollectionRef)
+          .then((contentSnapshot) => {
+            const contents = [];
+            contentSnapshot.forEach((content) => {
+              const _id = content.id;
+              const { titulo, tags, midia, descricao, link, autor } = content.data();
+              if (titulo.includes(searchTerm)) {
+                contents.push({ _id, tags, titulo, midia, descricao, link, autor });
+              }
+            });
+            response.json(contents);
+          })
+          .catch((error) => console.log(error));
+      }
 
 
 }

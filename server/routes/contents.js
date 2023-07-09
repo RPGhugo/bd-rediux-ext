@@ -27,6 +27,14 @@ router.get('/list', function(req, res, next) {
       ContentServices.delete(req,res)
     }
   )
-  
+
+  router.get('/search', (req, res, next) => {
+    ContentServices.search(req, res);
+  });
+
+  router.get('/search/media', (req,res, next) => {
+    ContentServices.searchByMediaType(req, res);
+  });
+    
   //module.exports = router;
   export default router 

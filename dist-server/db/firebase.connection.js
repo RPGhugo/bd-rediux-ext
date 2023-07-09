@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _app = require("firebase/app");
 var _firestore = require("firebase/firestore");
+var _storage = require("firebase/storage");
 // Import the functions you need from the SDKs you need
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -25,5 +26,7 @@ var app = (0, _app.initializeApp)(firebaseConfig);
 
 // Initialize Cloud Firestore and get a reference to the service
 var db = (0, _firestore.getFirestore)(app);
+
+// Initialize Cloud Storage and get a reference to the service
 var _default = db;
 exports["default"] = _default;
